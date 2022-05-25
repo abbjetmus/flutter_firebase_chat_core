@@ -351,8 +351,11 @@ class FirebaseChatCore {
       messageMap['updatedAt'] = FieldValue.serverTimestamp();
 
       await getFirebaseFirestore()
-          .collection('${config.roomsCollectionName}/$roomId/messages')
-          .add(messageMap);
+          .collection('${config.roomsCollectionName}')
+          .doc('$roomId')
+          .update({
+        "updatedAt": FieldValue.serverTimestamp(),
+      });
     }
   }
 
